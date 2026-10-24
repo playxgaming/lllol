@@ -1,0 +1,16 @@
+# Copy to /etc/systemd/system/ and adjust User and paths.
+[Unit]
+Description=Telegram auto-forwarder
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=ubuntu
+WorkingDirectory=/home/ubuntu/telegram-forwarder
+ExecStart=/home/ubuntu/telegram-forwarder/.venv/bin/python forwarder.py run
+Restart=always
+RestartSec=10
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=multi-user.target
