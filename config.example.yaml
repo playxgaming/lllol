@@ -1,0 +1,24 @@
+# Each rule watches its sources and sends every new post to its targets.
+# Sources/targets can be: @username, https://t.me/link, a numeric ID
+# (run `python forwarder.py chats` to see IDs), or "me" for Saved Messages.
+
+rules:
+  - name: news-to-my-channel
+    sources:
+      - "@some_public_channel"
+      - -1001234567890
+    targets:
+      - "@my_channel"
+    mode: copy            # copy = looks like your own post, forward = shows "Forwarded from"
+
+  - name: deals-only
+    sources: ["@deals_channel"]
+    targets: ["me"]
+    mode: copy
+    include: ["discount", "% off", "/\\bfree\\b/"]   # keep only posts containing any of these (/regex/ allowed)
+    exclude: ["sponsored", "/\\bad\\b/"]               # drop posts containing any of these
+    # media_only: true    # only posts with photo/video/file
+    # text_only: true     # only posts without media
+    replace:              # copy mode only
+      "@deals_channel": "@my_channel"
+    append: "via @my_channel"   # copy mode only

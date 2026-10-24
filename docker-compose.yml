@@ -1,0 +1,8 @@
+services:
+  forwarder:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      - ./config.yaml:/app/config.yaml:ro
+      - ./sessions:/app/sessions

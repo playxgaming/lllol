@@ -1,0 +1,4 @@
+telethon>=1.36
+pyyaml>=6.0
+python-dotenv>=1.0
+cryptg>=0.4  # optional, makes media copying much faster
